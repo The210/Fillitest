@@ -6,7 +6,7 @@
 /*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 18:41:52 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/12/15 16:13:43 by dhorvill         ###   ########.fr       */
+/*   Updated: 2017/12/18 00:42:42 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	ft_putstre(char const *c, int n)
 	int i;
 
 	i = 0;
-	while(c[i] && i < n)
+	while (c[i] && i < n)
 	{
 		if (c[i] != 'e' && i < n)
 			ft_putchar(c[i]);
@@ -25,7 +25,7 @@ static void	ft_putstre(char const *c, int n)
 	}
 }
 
-void	ft_putstr_improved(char **pdt, int n)
+void		ft_putstr_improved(char **pdt, int n)
 {
 	int i;
 

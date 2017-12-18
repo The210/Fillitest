@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 03:41:30 by dhorvill          #+#    #+#             */
-/*   Updated: 2017/12/04 20:01:16 by ybouzgao         ###   ########.fr       */
+/*   Updated: 2017/12/18 00:34:26 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	ft_is_there_h(char *line)
 	return (flag);
 }
 
-int	ft_find_highest(char **pdt)
+int			ft_find_highest(char **pdt)
 {
 	char	**line;
 	int		i;
@@ -62,7 +62,7 @@ int	ft_find_highest(char **pdt)
 	return (highest);
 }
 
-int	ft_find_longest(char **p)
+int			ft_find_longest(char **p)
 {
 	int	i;
 	int j;
@@ -90,24 +90,3 @@ int	ft_find_longest(char **p)
 	}
 	return (longest);
 }
-
-/*int			main(int argc, char **argv)
-{
-	int		fd;
-	int		ret;
-	char	buf[BUF_SIZE + 1];
-	char	**pdt;
-
-	longest = 0;
-	if (argc != 2)
-		return (1);
-	fd = open(argv[1], O_RDONLY);
-	ret = read(fd, buf, BUF_SIZE);
-	buf[ret] = '\0';
-	if ((pdt = ft_create_table(buf, ret)) == NULL)
-		return (0);
-	if (ft_find_highest(pdt) > ft_find_longest(pdt, longest))
-		return (ft_find_highest(pdt));
-	else
-		return (ft_find_longest(pdt, longest));
-}*/

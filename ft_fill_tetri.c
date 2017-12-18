@@ -6,14 +6,14 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 14:12:40 by dhorvill          #+#    #+#             */
-/*   Updated: 2017/12/15 21:56:04 by dhorvill         ###   ########.fr       */
+/*   Updated: 2017/12/17 23:43:21 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
 
-char **ft_create_table(char *buf, int ret)
+char			**ft_create_table(char *buf, int ret)
 {
 	int		i;
 	char	new_str[ret];
@@ -33,7 +33,7 @@ char **ft_create_table(char *buf, int ret)
 	return (new_table);
 }
 
-static t_tetri	ft_fill_tetri(char **tetri, t_tetri tetrimino)
+static t_tetri	ft_fill_tetri(char **t, t_tetri tetrimino)
 {
 	int i;
 	int j;
@@ -46,45 +46,45 @@ static t_tetri	ft_fill_tetri(char **tetri, t_tetri tetrimino)
 	{
 		while (k < 3)
 		{
-			while (tetri[i][j] && tetri[i][j] != '#')
+			while (t[i][j] && t[i][j] != '#')
 				j++;
-			if (tetri[i][j] != '#')
+			if (t[i][j] != '#')
 			{
 				i++;
 				j = 0;
 			}
-			if (tetri[i][j] == '#')
+			if (t[i][j] == '#')
 			{
-				if ((tetri[i + 1] && tetri[i + 1][j] == '#' && tetri[i + 1][j - 2] == '#') ||
-						(tetri[i][j - 2] == '#' && tetri[i + 1][j - 2] == '#'))
+				if ((t[i + 1] && t[i + 1][j] == '#' && t[i + 1][j - 2] == '#')
+					|| (t[i][j - 2] == '#' && t[i + 1][j - 2] == '#'))
 				{
 					j = j - 2;
 					i++;
 					tetrimino.coord[k] = 'P';
 				}
-				else if (tetri[i][j + 1] == '#')
+				else if (t[i][j + 1] == '#')
 				{
 					j++;
 					tetrimino.coord[k] = 'R';
 				}
-				else if (tetri[i + 1][j - 1] == '#')
+				else if (t[i + 1][j - 1] == '#')
 				{
 					i++;
 					j--;
 					tetrimino.coord[k] = 'Z';
 				}
-				else if (tetri[i + 1][j] == '#')
+				else if (t[i + 1][j] == '#')
 				{
 					i++;
 					tetrimino.coord[k] = 'D';
 				}
-				else if (tetri[i + 1][j + 1] == '#')
+				else if (t[i + 1][j + 1] == '#')
 				{
 					tetrimino.coord[k] = 'X';
 					i++;
 					j++;
 				}
-				else if (tetri[i][j - 1] == '#')
+				else if (t[i][j - 1] == '#')
 				{
 					j--;
 					tetrimino.coord[k] = 'L';
@@ -93,7 +93,6 @@ static t_tetri	ft_fill_tetri(char **tetri, t_tetri tetrimino)
 			}
 		}
 	}
-	tetrimino.coord[4] = '\0';
 	return (tetrimino);
 }
 
@@ -131,11 +130,11 @@ static t_tetri	*ft_fill_all_tetri(char **pdt, t_tetri *tetriminos, int nbr)
 	return (tetriminos);
 }
 
-t_tetri	*ft_ret_tet(char *buf, int ret)
+t_tetri			*ft_ret_tet(char *buf, int ret)
 {
 	char	**all_tetri;
 	t_tetri	*tetri_tab;
-	int i;
+	int		i;
 
 	i = 0;
 	all_tetri = ft_create_table(buf, ret);
@@ -146,18 +145,3 @@ t_tetri	*ft_ret_tet(char *buf, int ret)
 	ft_fill_all_tetri(all_tetri, tetri_tab, i);
 	return (tetri_tab);
 }
-
-/*int	main(int argc, char **argv)
-  {
-  int fd;
-  int ret;
-  char	buf[BUF_SIZE + 1];
-  t_tetri *tetri_tab;
-
-  fd = open(argv[1], O_RDONLY);
-  ret = read(fd, buf, BUF_SIZE);
-  buf[ret] = '\0';
-  tetri_tab = ft_ret_tet(buf, ret);
-  ft_putstr(tetri_tab[11].coord);
-  return (0);
-  }*/

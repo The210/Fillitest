@@ -6,7 +6,7 @@
 /*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 16:20:50 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/12/15 19:09:51 by ybouzgao         ###   ########.fr       */
+/*   Updated: 2017/12/17 22:57:44 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int		size_square(int nbr_tetriminos, int highest_size, int longest_size)
 
 char	*ft_tab_improved(int n)
 {
-	int i;
-	int j;
-	char *buf;
+	int		i;
+	int		j;
+	char	*buf;
 
 	i = 1;
 	j = 0;
@@ -60,11 +60,11 @@ char	*ft_tab_improved(int n)
 		j = 1;
 		i++;
 	}
-	return(buf);
+	return (buf);
 }
 
-char **ft_tab(int n)
-{ 	
+char	**ft_tab(int n)
+{
 	char *buf;
 	char **tab;
 

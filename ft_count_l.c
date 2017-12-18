@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 03:51:22 by dhorvill          #+#    #+#             */
-/*   Updated: 2017/12/04 19:54:48 by ybouzgao         ###   ########.fr       */
+/*   Updated: 2017/12/17 22:59:50 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	ft_is_there_h(char *line)
 	return (flag);
 }
 
-int	ft_find_highest(char **pdt)
+int			ft_find_highest(char **pdt)
 {
 	char	**line;
 	int		i;
@@ -62,13 +62,13 @@ int	ft_find_highest(char **pdt)
 	return (highest);
 }
 
-int ft_find_longest(char **pdt)
+int			ft_find_longest(char **pdt)
 {
 	int i;
 	int j;
 	int counter;
 	int longest;
-	
+
 	longest = 1;
 	while (pdt[i])
 	{
@@ -76,7 +76,8 @@ int ft_find_longest(char **pdt)
 		counter = 1;
 		while (pdt[i][j])
 		{
-			if (pdt[i][j] == '#' && (pdt[i][j + 1] == '#' || pdt[i][j + 6] == '#'))
+			if (pdt[i][j] == '#' &&
+					(pdt[i][j + 1] == '#' || pdt[i][j + 6] == '#'))
 				counter++;
 			j++;
 		}

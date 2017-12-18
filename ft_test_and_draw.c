@@ -6,45 +6,45 @@
 /*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 15:53:28 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/12/15 22:31:20 by dhorvill         ###   ########.fr       */
+/*   Updated: 2017/12/17 23:42:57 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
 
-t_misc	find_next_point(t_misc S, char **tab)
+t_misc	find_next_point(t_misc s, char **tab)
 {
-	if (tab[S.a][S.b] == 'e')
+	if (tab[s.a][s.b] == 'e')
 	{
-		S.a++;
-		S.b = 0;
+		s.a++;
+		s.b = 0;
 	}
-	while (tab[S.a][S.b] != 'e' && tab[S.a][S.b] != '.')
+	while (tab[s.a][s.b] != 'e' && tab[s.a][s.b] != '.')
 	{
-		while (tab[S.a + 1][S.b + 1] != 'e' && tab[S.a][S.b] != '.')				
-			S.b++;
-		if (tab[S.a][S.b] != '.')
+		while (tab[s.a + 1][s.b + 1] != 'e' && tab[s.a][s.b] != '.')
+			s.b++;
+		if (tab[s.a][s.b] != '.')
 		{
-			S.a++;
-			S.b = 0;
+			s.a++;
+			s.b = 0;
 		}
 	}
-	return (S);
+	return (s);
 }
-#include <stdio.h>
-int		test_position(t_tetri tetriminos, t_misc S,  char **tab)
+
+int		test_position(t_tetri tetriminos, t_misc s, char **tab)
 {
 	int		count;
 	int		k;
 	int		m;
 	int		n;
 
-	count = 0;
 	k = 0;
-	m = S.a;
-	n = S.b;
-	while (tab[m][n] && count <= 3)
+	m = s.a;
+	n = s.b;
+	count = 0;
+	while (count <= 3 && tab[m][n])
 	{
 		if (tab[m][n] == '.')
 			count++;
@@ -56,25 +56,17 @@ int		test_position(t_tetri tetriminos, t_misc S,  char **tab)
 			{
 				n = n - 2;
 				m++;
-				if (n < 0)
-					return (1);
 			}
 			if (tetriminos.coord[k] == 'R' && tab[m][n])
 				n++;
 			if (tetriminos.coord[k] == 'D' && tab[m][n])
 				m++;
 			if (tetriminos.coord[k] == 'L' && tab[m][n])
-			{
 				n--;
-				if (n < 0)
-					return (1);
-			}
 			if (tetriminos.coord[k] == 'Z' && tab[m][n])
 			{
 				m++;
 				n--;
-				if (n < 0)
-					return (1);
 			}
 			if (tetriminos.coord[k] == 'X' && tab[m][n])
 			{
@@ -83,11 +75,6 @@ int		test_position(t_tetri tetriminos, t_misc S,  char **tab)
 			}
 			k++;
 		}
-		if ((count <= 3) && (n < 0))
-		{
-			printf("ALERTTT\n");
-			exit (0);
-		}	
 	}
 	if (count == 4)
 		return (0);
@@ -95,17 +82,17 @@ int		test_position(t_tetri tetriminos, t_misc S,  char **tab)
 		return (1);
 }
 
-char	**draw_tetriminos(t_tetri tetriminos, t_misc S,  char **tab)
+char	**draw_tetriminos(t_tetri tetriminos, t_misc s, char **tab)
 {
 	int k;
 	int m;
 	int n;
 
-	m = S.a;
-	n = S.b;
+	m = s.a;
+	n = s.b;
 	k = 0;
 	while (k <= 3)
-	{	
+	{
 		tab[m][n] = tetriminos.coord[3];
 		if (k <= 2)
 		{

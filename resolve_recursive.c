@@ -6,14 +6,14 @@
 /*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 16:19:50 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/12/15 21:53:00 by dhorvill         ###   ########.fr       */
+/*   Updated: 2017/12/18 14:36:41 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
 
-char	**ft_strcpy_improved(char **dest, char **tab, t_misc S)
+char	**ft_strcpy_improved(char **dest, char **tab, t_misc s)
 {	
 	int i;
 	int j;
@@ -24,10 +24,10 @@ char	**ft_strcpy_improved(char **dest, char **tab, t_misc S)
 	if ((dest = malloc(sizeof(char*) * (i + 1))) == NULL)
 		return (NULL);
 	i = -1;
-	while (++i < S.n)
+	while (++i < s.n)
 	{
 		j = 0;
-		while (j < S.n)
+		while (j < s.n)
 			j++;
 		if ((dest[i] = malloc(sizeof(char*) * (j + 1))) == NULL)
 			return (NULL);
@@ -42,123 +42,112 @@ char	**ft_strcpy_improved(char **dest, char **tab, t_misc S)
 	return (dest);
 }
 
-#include <stdio.h>
-
-t_misc	ft_find_spot_start(t_tetri tetriminos, char **tab, t_misc S)
+t_misc	ft_find_spot_start(t_tetri tetriminos, char **tab, t_misc s)
 {
-	S.a = 0;
-	S.b = 0;
-	while (test_position(tetriminos, S, tab) == 1 && tab[S.a][S.b] != 'e')
+	s.a = 0;
+	s.b = 0;
+	while (test_position(tetriminos, s, tab) == 1 && tab[s.a][s.b] != 'e')
 	{
-		S.b++;
-		S = find_next_point(S, tab);
+		s.b++;
+		s = find_next_point(s, tab);
 	}
-	if (S.b == S.c && S.a == S.d)
+/*	if (s.b == s.c && s.a == s.d)
 	{
-		S.b++;
-		S = find_next_point(S, tab);
-		while (test_position(tetriminos, S, tab) == 1 && tab[S.a][S.b] != 'e')
+		s.b++;
+		s = find_next_point(s, tab);
+		while (test_position(tetriminos, s, tab) == 1 && tab[s.a][s.b] != 'e')
 		{
-			S.b++;
-			S = find_next_point(S, tab);
+			s.b++;
+			s = find_next_point(s, tab);
 		}
-	}
-	return (S);
+	}*/
+	return (s);
 }
 
-t_misc	ft_find_spot(t_tetri tetriminos, char **tab, t_misc S)
+t_misc	ft_find_spot(t_tetri tetriminos, char **tab, t_misc s)
 {
-	while (test_position(tetriminos, S, tab) == 1 && tab[S.a][S.b] != 'e')
+	while (test_position(tetriminos, s, tab) == 1 && tab[s.a][s.b] != 'e')
 	{
-		S.b++;
-		S = find_next_point(S, tab);
+		s.b++;
+		s = find_next_point(s, tab);
 	}
-	return (S);
+	return (s);
 }
 
-t_misc		ft_double_test(char **tab, t_misc S, t_tetri *tetriminos)
+t_misc		ft_double_test(char **tab, t_misc s, t_tetri *tetriminos)
 {
-	S.c = S.a;
-	S.d = S.b;
-	if (test_position(tetriminos[S.e], S, tab) == 0)
+	s.c = s.a;
+	s.d = s.b;
+	if (test_position(tetriminos[s.e], s, tab) == 0)
 	{
-		tab = draw_tetriminos(tetriminos[S.e], S, tab);
-		S = ft_find_spot_start(tetriminos[S.e + 1], tab, S);
-		if (test_position(tetriminos[S.e + 1], S, tab) == 0 && (S.e + 1) < tetriminos[0].nbr - 1)
+		tab = draw_tetriminos(tetriminos[s.e], s, tab);
+		s = ft_find_spot_start(tetriminos[s.e + 1], tab, s);
+		if (test_position(tetriminos[s.e + 1], s, tab) == 0 && (s.e + 1) < tetriminos[0].nbr - 1)
 		{
-			S.p = 0;
-			return (S);
+			s.p = 0;
+			return (s);
 		}
-		else if (test_position(tetriminos[S.e + 1], S, tab) == 0)
+		else if (test_position(tetriminos[s.e + 1], s, tab) == 0)
 		{
-			tab = draw_tetriminos(tetriminos[S.e + 1], S, tab);
-			S.p = 0;
-			return (S);
+			tab = draw_tetriminos(tetriminos[s.e + 1], s, tab);
+			s.p = 0;
+			return (s);
 		}
 	}
-	S.p = 1;
-	return (S);
+	s.p = 1;
+	return (s);
 }
 
-char	**combination_recursive(t_tetri *tetriminos, t_misc S, char **str)
+char	**combination_recursive(t_tetri *tetriminos, t_misc s, char **str)
 {
-	ft_putnbr(S.b);
-	ft_putchar('\n');
 	if (tetriminos[0].nbr == 1)
 	{
-		draw_tetriminos(tetriminos[0], S,  str);
+		draw_tetriminos(tetriminos[0], s,  str);
 		return (str);
 	}
-	if (S.e >= tetriminos[0].nbr - 1)
+	if (s.e >= tetriminos[0].nbr - 1)
 		return (str);
-	S = ft_double_test(str, S, tetriminos);
-	if (S.p == 0)
+	s = ft_double_test(str, s, tetriminos);
+	if (s.p == 0)
 	{
-		S.e++;
-		if (S.e >= tetriminos[0].nbr - 1)
+		s.e++;
+		if (s.e >= tetriminos[0].nbr - 1)
 			return (str);
-		return (combination_recursive(tetriminos, S, str));
+		return (combination_recursive(tetriminos, s, str));
 	}
 	else
 	{
-		S = ft_findcoord(str, S, tetriminos[S.e]);
-		ft_erase(str, tetriminos[S.e]);
-		S = ft_find_spot(tetriminos[S.e], str, S);
-		while (S.e > 0 && S.a >= S.n)
+		s = ft_findcoord(str, s, tetriminos[s.e]);
+		ft_erase(str, tetriminos[s.e]);
+		s = ft_find_spot(tetriminos[s.e], str, s);
+		while (s.e > 0 && s.a >= s.n)
 		{
-			S.e--;
-			S = ft_findcoord(str, S, tetriminos[S.e]);
-			ft_erase(str, tetriminos[S.e]);
-			S = ft_find_spot(tetriminos[S.e], str, S);
+			s.e--;
+			s = ft_findcoord(str, s, tetriminos[s.e]);
+			ft_erase(str, tetriminos[s.e]);
+			s = ft_find_spot(tetriminos[s.e], str, s);
 		}
-		if (S.e == 0 && S.a >= S.n)
+		if (s.e == 0 && s.a >= s.n)
 			return (NULL);
-	/*	while (S.a >= S.n)
-		{
-			S.e--;
-			S = ft_findcoord(str, S, tetriminos[S.e]);
-			ft_erase(str, tetriminos[S.e]);
-			S = ft_find_spot(tetriminos[S.e], str, S);
-		}*/
-		return (combination_recursive(tetriminos, S, str));
+		return (combination_recursive(tetriminos, s, str));
 	}
 	return (NULL);
 }
 
-char	**resolve_recursive(t_misc S, t_tetri *tetriminos)
+char	**resolve_recursive(t_misc s, t_tetri *tetriminos)
 {
 	char	**str;
 
-	S.a = 0;
-	S.b = 0;
-	S.e = 0;
-	str = ft_tab(S.n);
-	str = combination_recursive(tetriminos, S, str); 
+	s.a = 0;
+	s.b = 0;
+	s.e = 0;
+	str = ft_tab(s.n);
+	str = combination_recursive(tetriminos, s, str); 
 	if (str != NULL)
 		return (str);
 	else
 	{
-		S.n++;
-		return (resolve_recursive(S, tetriminos));
+		s.n++;
+		return (resolve_recursive(s, tetriminos));
 	}
 }
