@@ -6,14 +6,14 @@
 /*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 22:08:24 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/12/17 23:35:09 by dhorvill         ###   ########.fr       */
+/*   Updated: 2017/12/18 22:48:33 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
 
-t_misc	ft_findcoord(char **tab, t_misc s, t_tetri tetrimino)
+t_misc	ft_findcoord(char **tab, t_misc *s, t_tetri tetrimino)
 {
 	int i;
 	int j;
@@ -21,10 +21,10 @@ t_misc	ft_findcoord(char **tab, t_misc s, t_tetri tetrimino)
 
 	i = -1;
 	f = 0;
-	while (++i < s.n)
+	while (++i < s->n)
 	{
 		j = -1;
-		while (++j < s.n)
+		while (++j < s->n)
 		{
 			if (tab[i][j] == tetrimino.coord[3])
 			{
@@ -41,12 +41,12 @@ t_misc	ft_findcoord(char **tab, t_misc s, t_tetri tetrimino)
 		i = 0;
 		j = 1;
 	}
-	if (j >= s.n)
+	if (j >= s->n)
 	{
 		j = 0;
 		i++;
 	}
-	s.a = i;
-	s.b = j;
-	return (s);
+	s->a = i;
+	s->b = j;
+	return (*s);
 }

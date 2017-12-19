@@ -6,7 +6,7 @@
 /*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 16:20:50 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/12/17 22:57:44 by dhorvill         ###   ########.fr       */
+/*   Updated: 2017/12/18 23:28:41 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ char	*ft_tab_improved(int n)
 
 	i = 1;
 	j = 0;
-	buf = ft_strnew(100 * 100 + 1);
-	while (i < 100 * 100 - 1)
+	buf = ft_strnew(30 * 30 + 1);
+	while (i < 30 * 30 - 1)
 	{
-		if (i != 0 && i % (100 + j) == 0)
+		if (i != 0 && i % (30 + j) == 0)
 			buf[i - 1] = '\n';
-		else if (i % (100 + j) <= n && i < 100 * n)
+		else if (i % (30 + j) <= n && i < 30 * n)
 			buf[i - 1] = '.';
 		else
 			buf[i - 1] = 'e';

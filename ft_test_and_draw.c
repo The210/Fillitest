@@ -6,7 +6,7 @@
 /*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 15:53:28 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/12/17 23:42:57 by dhorvill         ###   ########.fr       */
+/*   Updated: 2017/12/18 23:19:40 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		test_position(t_tetri tetriminos, t_misc s, char **tab)
 	m = s.a;
 	n = s.b;
 	count = 0;
-	while (count <= 3 && tab[m][n])
+	while (tab[m][n] && count <= 3)
 	{
 		if (tab[m][n] == '.')
 			count++;
@@ -56,17 +56,25 @@ int		test_position(t_tetri tetriminos, t_misc s, char **tab)
 			{
 				n = n - 2;
 				m++;
+				if (n < 0)
+					return (1);
 			}
 			if (tetriminos.coord[k] == 'R' && tab[m][n])
 				n++;
 			if (tetriminos.coord[k] == 'D' && tab[m][n])
 				m++;
 			if (tetriminos.coord[k] == 'L' && tab[m][n])
+			{
 				n--;
+				if (n < 0)
+					return (1);
+			}
 			if (tetriminos.coord[k] == 'Z' && tab[m][n])
 			{
 				m++;
 				n--;
+				if (n < 0)
+					return (1);
 			}
 			if (tetriminos.coord[k] == 'X' && tab[m][n])
 			{
@@ -75,6 +83,8 @@ int		test_position(t_tetri tetriminos, t_misc s, char **tab)
 			}
 			k++;
 		}
+		if ((count <= 3) && (n < 0))
+			ft_putstr("ALERT\n");
 	}
 	if (count == 4)
 		return (0);

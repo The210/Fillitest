@@ -6,14 +6,14 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 21:13:41 by dhorvill          #+#    #+#             */
-/*   Updated: 2017/12/18 00:46:59 by dhorvill         ###   ########.fr       */
+/*   Updated: 2017/12/18 15:07:26 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <fcntl.h>
 
-#define BUF_SIZE 545
+#define BUF_SIZE 800
 
 static int	nbw(char *s, char c)
 {
@@ -150,6 +150,8 @@ int			check_valid(int a, char **c)
 	t[0] = open(c[1], O_RDONLY);
 	t[1] = read(t[0], b, BUF_SIZE);
 	b[t[1]] = '\0';
+	if (b[t[1] - 2] == '\n')
+		t[6] = 1;
 	if (!*b)
 		t[6] = 1;
 	if (ft_more_checks(b, t[1]) != 0)

@@ -6,7 +6,7 @@
 /*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 16:53:30 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/12/18 00:45:18 by dhorvill         ###   ########.fr       */
+/*   Updated: 2017/12/18 23:22:17 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 typedef	struct	s_tetri
 {
-	char	coord[4];
+	char	coord[5];
 	int		nbr;
 	int		length;
 	int		height;
@@ -42,7 +42,7 @@ char			**ft_create_table(char *buf, int ret);
 int				ft_find_highest(char **pdt);
 void			ft_freestr(char **str);
 int				ft_strcmp_improved(char **str, char **tab);
-t_misc			ft_findcoord(char **tab, t_misc s, t_tetri tetrimino);
+t_misc			ft_findcoord(char **tab, t_misc *s, t_tetri tetrimino);
 void			ft_erase(char **tab, t_tetri tetrimino);
 
 int				ft_sqrt_improved(int nb);
@@ -57,7 +57,7 @@ char			**ft_strcpy_improved(char **dest, char **tab, t_misc s);
 t_misc			ft_find_spot(t_tetri tetriminos, char **tab, t_misc s);
 t_misc			ft_double_test(char **tab, t_misc s, t_tetri *tetriminos);
 char			**combination_recursive(t_tetri *tetriminos,
-		t_misc s, char **str);
+		t_misc *s, char **str);
 char			**resolve_recursive(t_misc s, t_tetri *tetriminos);
 void			ft_putstr_improved(char **pdt, int n);
 
